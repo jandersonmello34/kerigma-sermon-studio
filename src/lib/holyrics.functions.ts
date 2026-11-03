@@ -76,11 +76,11 @@ export const listHolyricsImages = createServerFn({ method: "POST" })
     const env = await post(context as Ctx, "GetImages", { include_thumbnail: true });
     if (!Array.isArray(env.data)) return [];
     return (env.data as Array<Record<string, unknown>>)
-      .filter((i) => typeof i.name === "string" && i.name !== "")
+      .filter((i) => typeof i["name"] === "string" && i["name"] !== "")
       .map((i) => ({
-        id: i.name as string,
-        name: i.name as string,
-        thumbnail: typeof i.thumbnail === "string" ? i.thumbnail : "",
+        id: i["name"] as string,
+        name: i["name"] as string,
+        thumbnail: typeof i["thumbnail"] === "string" ? i["thumbnail"] : "",
       }));
   });
 
@@ -111,7 +111,7 @@ export const getHolyricsProjectionState = createServerFn({ method: "POST" })
     const d = env.data as Record<string, unknown> | null | undefined;
     if (!d || typeof d !== "object" || Array.isArray(d)) return null;
     return {
-      itemName: typeof d.name === "string" ? d.name : "",
-      slideNumber: typeof d.slide_number === "number" && d.slide_number >= 0 ? d.slide_number : 0,
+      itemName: typeof d["name"] === "string" ? d["name"] : "",
+      slideNumber: typeof d["slide_number"] === "number" && d["slide_number"] >= 0 ? d["slide_number"] : 0,
     };
   });

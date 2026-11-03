@@ -84,7 +84,7 @@ export const generateSermonOutline = createServerFn({ method: "POST" })
       "Não use marcadores de lista, numeração, títulos de seção nem crases.";
     const ls = lines(await runChat(prompt));
     if (ls.length < 2) throw new Error("A assistência de IA retornou um esboço em formato inesperado");
-    return { outline: ls[0], summary: ls[1] };
+    return { outline: ls[0] ?? "", summary: ls[1] ?? "" };
   });
 
 export const suggestSermonImprovements = createServerFn({ method: "POST" })

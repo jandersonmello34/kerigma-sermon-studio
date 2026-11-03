@@ -16,9 +16,9 @@ export type SermonInput = Omit<Sermon, "id" | "createdAt" | "updatedAt">;
 export type SermonUpdate = SermonInput;
 
 export type SermonFilter = {
-  search?: string;
-  theme?: string;
-  status?: SermonStatus;
+  search?: string | undefined;
+  theme?: string | undefined;
+  status?: SermonStatus | undefined;
 };
 
 export type Collection = { id: string; name: string; createdAt: string };

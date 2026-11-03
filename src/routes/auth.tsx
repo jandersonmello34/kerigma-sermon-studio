@@ -9,7 +9,7 @@ import { Sparkles } from "lucide-react";
 import { type FormEvent, useEffect, useState } from "react";
 import { toast } from "sonner";
 
-type Search = { redirect?: string };
+type Search = { redirect?: string | undefined };
 
 function safePath(p: string | undefined) {
   return p && p.startsWith("/") && !p.startsWith("//") ? p : "/sermoes";
@@ -17,7 +17,7 @@ function safePath(p: string | undefined) {
 
 export const Route = createFileRoute("/auth")({
   validateSearch: (s: Record<string, unknown>): Search => ({
-    redirect: typeof s.redirect === "string" ? s.redirect : undefined,
+    redirect: typeof s["redirect"] === "string" ? s["redirect"] : undefined,
   }),
   head: () => ({
     meta: [
