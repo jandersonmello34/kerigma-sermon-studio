@@ -1,0 +1,10 @@
+[
+ {"capability":"code","source":"Caffeine/ICP React + Motoko","outcome":"migrated to TanStack routes","status":"done","next_action":""},
+ {"capability":"schema","source":"canister maps","outcome":"sermons, collections, holyrics_configs tables with owner RLS","status":"done","next_action":""},
+ {"capability":"records","source":"canister state","outcome":"migrate","status":"pending","next_action":"User to export existing sermons or skip"},
+ {"capability":"auth identities","source":"Internet Identity (no emails)","outcome":"replaced with email/Google/Lovable sign-in","status":"pending","next_action":"Old principals cannot be mapped without user export"},
+ {"capability":"authorization","source":"owner-scoped","outcome":"RLS per user","status":"done","next_action":""},
+ {"capability":"AI assistance","source":"Caffeine inference","outcome":"Lovable AI","status":"implemented","next_action":"Live check after first sign-in"},
+ {"capability":"Holyrics API","source":"api.holyrics.com.br","outcome":"preserved; settings now per user","status":"implemented","next_action":"User enters key/token in Configurações"},
+ {"capability":"verification","source":"","outcome":"build, typecheck, tests, sign-in screen","status":"partial","next_action":"Signed-in flow not exercised: no accounts exist yet"}
+]
