@@ -14,7 +14,84 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      collections: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          owner_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          owner_id?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          owner_id?: string
+        }
+        Relationships: []
+      }
+      holyrics_configs: {
+        Row: {
+          api_key: string
+          owner_id: string
+          server_token: string
+          updated_at: string
+        }
+        Insert: {
+          api_key: string
+          owner_id?: string
+          server_token: string
+          updated_at?: string
+        }
+        Update: {
+          api_key?: string
+          owner_id?: string
+          server_token?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      sermons: {
+        Row: {
+          bible_reference: string
+          body: string
+          created_at: string
+          id: string
+          owner_id: string
+          status: Database["public"]["Enums"]["sermon_status"]
+          theme: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          bible_reference?: string
+          body?: string
+          created_at?: string
+          id?: string
+          owner_id?: string
+          status?: Database["public"]["Enums"]["sermon_status"]
+          theme?: string
+          title?: string
+          updated_at?: string
+        }
+        Update: {
+          bible_reference?: string
+          body?: string
+          created_at?: string
+          id?: string
+          owner_id?: string
+          status?: Database["public"]["Enums"]["sermon_status"]
+          theme?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +100,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      sermon_status: "draft" | "ready"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +227,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      sermon_status: ["draft", "ready"],
+    },
   },
 } as const
