@@ -1,4 +1,4 @@
-import { type Sermon, SermonStatus } from "@/backend";
+import { type Sermon, SermonStatus } from "@/lib/types";
 import {
   AlertDialog,
   AlertDialogAction,

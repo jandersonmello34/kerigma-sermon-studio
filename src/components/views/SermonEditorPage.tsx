@@ -1,4 +1,4 @@
-import { type SermonInput, SermonStatus } from "@/backend";
+import { type SermonInput, SermonStatus } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -60,13 +60,9 @@ const emptyDraft: Draft = {
   status: SermonStatus.draft,
 };
 
-function parseSermonId(raw: string | undefined): bigint | undefined {
+function parseSermonId(raw: string | undefined): string | undefined {
   if (!raw || raw === "novo") return undefined;
-  try {
-    return BigInt(raw);
-  } catch {
-    return undefined;
-  }
+  return raw;
 }
 
 export default function SermonEditorPage() {
