@@ -1,4 +1,4 @@
-import { SignInButton } from "@/components/InternetIdentity";
+import { SignOutButton } from "@/components/SignOutButton";
 import { cn } from "@/lib/utils";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { BookOpenText, MonitorPlay, Settings, Sparkles } from "lucide-react";
@@ -12,7 +12,7 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { to: "/", label: "Sermões", icon: BookOpenText, ocid: "nav.sermons.link" },
+  { to: "/sermoes", label: "Sermões", icon: BookOpenText, ocid: "nav.sermons.link" },
   {
     to: "/projecao",
     label: "Projeção",
@@ -32,7 +32,7 @@ function NavLink({ item }: { item: NavItem }) {
     select: (state) => state.location.pathname,
   });
   const isActive =
-    item.to === "/" ? pathname === "/" : pathname.startsWith(item.to);
+    pathname.startsWith(item.to);
   const Icon = item.icon;
   return (
     <Link
@@ -84,7 +84,7 @@ export function Layout({ children }: { children: ReactNode }) {
           ))}
         </nav>
         <div className="border-t border-sidebar-border p-3">
-          <SignInButton className="w-full rounded-lg border border-sidebar-border px-3 py-2 text-sm font-medium text-sidebar-foreground/80 transition-smooth hover:border-primary/50 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:opacity-60" />
+          <SignOutButton className="w-full rounded-lg border border-sidebar-border px-3 py-2 text-sm font-medium text-sidebar-foreground/80 transition-smooth hover:border-primary/50 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:opacity-60" />
         </div>
       </aside>
 
@@ -102,7 +102,7 @@ export function Layout({ children }: { children: ReactNode }) {
             ))}
           </nav>
           <div className="ml-auto hidden items-center gap-3 md:flex">
-            <SignInButton className="rounded-lg border border-border px-3 py-1.5 text-sm font-medium text-muted-foreground transition-smooth hover:border-primary/50 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:opacity-60" />
+            <SignOutButton className="rounded-lg border border-border px-3 py-1.5 text-sm font-medium text-muted-foreground transition-smooth hover:border-primary/50 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:opacity-60" />
           </div>
         </header>
 
@@ -111,14 +111,7 @@ export function Layout({ children }: { children: ReactNode }) {
         </main>
 
         <footer className="border-t border-border bg-card px-4 py-4 text-center text-xs text-muted-foreground md:px-8">
-          <a
-            href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`}
-            target="_blank"
-            rel="noreferrer"
-            className="transition-colors hover:text-primary"
-          >
-            © {year}. Built with love using caffeine.ai
-          </a>
+          © {year} Kerigma
         </footer>
       </div>
     </div>

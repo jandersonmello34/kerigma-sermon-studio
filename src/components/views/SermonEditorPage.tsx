@@ -199,7 +199,7 @@ export default function SermonEditorPage() {
               type="button"
               variant="outline"
               data-ocid="sermon_editor.back_button"
-              onClick={() => void navigate({ to: "/" })}
+              onClick={() => void navigate({ to: "/sermoes" })}
             >
               <ArrowLeft className="size-4" aria-hidden="true" />
               Voltar para sermões
@@ -223,7 +223,7 @@ export default function SermonEditorPage() {
             size="sm"
             data-ocid="sermon_editor.back_button"
             className="-ml-2 mb-2 text-muted-foreground hover:text-primary"
-            onClick={() => void navigate({ to: "/" })}
+            onClick={() => void navigate({ to: "/sermoes" })}
           >
             <ArrowLeft className="size-4" aria-hidden="true" />
             Sermões
