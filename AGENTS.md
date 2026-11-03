@@ -8,3 +8,8 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Kerigma (migrated from Caffeine/ICP)
+- Signed-in pages live under `src/routes/_authenticated/`; page bodies are in `src/components/views/` so routes stay thin.
+- Sermons and collections are read/written from the browser client with owner-scoped RLS; AI and Holyrics calls go through `createServerFn` with `requireSupabaseAuth` because they need server keys or per-user stored credentials.
+- Holyrics credentials are stored per user in `holyrics_configs` (original app stored one global config).
