@@ -8,11 +8,12 @@ export type Sermon = {
   bibleReference: string;
   theme: string;
   status: SermonStatus;
+  durationMinutes: number;
   createdAt: string;
   updatedAt: string;
 };
 
-export type SermonInput = Omit<Sermon, "id" | "createdAt" | "updatedAt">;
+export type SermonInput = Omit<Sermon, "id" | "createdAt" | "updatedAt" | "durationMinutes"> & { durationMinutes?: number };
 export type SermonUpdate = SermonInput;
 
 export type SermonFilter = {

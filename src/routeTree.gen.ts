@@ -16,6 +16,7 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedBibliaRouteImport } from './routes/_authenticated/biblia'
 import { Route as AuthenticatedConfiguracoesRouteImport } from './routes/_authenticated/configuracoes'
 import { Route as AuthenticatedProjecaoRouteImport } from './routes/_authenticated/projecao'
+import { Route as AuthenticatedPulpitoSermonIdRouteImport } from './routes/_authenticated/pulpito.$sermonId'
 import { Route as AuthenticatedSermoesIndexRouteImport } from './routes/_authenticated/sermoes.index'
 import { Route as AuthenticatedSermoesSermonIdRouteImport } from './routes/_authenticated/sermoes.$sermonId'
 import { Route as AuthenticatedSermoesFlorescerRouteImport } from './routes/_authenticated/sermoes.florescer'
@@ -55,6 +56,12 @@ const AuthenticatedProjecaoRoute = AuthenticatedProjecaoRouteImport.update({
   path: '/projecao',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedPulpitoSermonIdRoute =
+  AuthenticatedPulpitoSermonIdRouteImport.update({
+    id: '/pulpito/$sermonId',
+    path: '/pulpito/$sermonId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSermoesIndexRoute =
   AuthenticatedSermoesIndexRouteImport.update({
     id: '/sermoes/',
@@ -81,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/biblia': typeof AuthenticatedBibliaRoute
   '/configuracoes': typeof AuthenticatedConfiguracoesRoute
   '/projecao': typeof AuthenticatedProjecaoRoute
+  '/pulpito/$sermonId': typeof AuthenticatedPulpitoSermonIdRoute
   '/sermoes/$sermonId': typeof AuthenticatedSermoesSermonIdRoute
   '/sermoes/florescer': typeof AuthenticatedSermoesFlorescerRoute
   '/sermoes/': typeof AuthenticatedSermoesIndexRoute
@@ -92,6 +100,7 @@ export interface FileRoutesByTo {
   '/biblia': typeof AuthenticatedBibliaRoute
   '/configuracoes': typeof AuthenticatedConfiguracoesRoute
   '/projecao': typeof AuthenticatedProjecaoRoute
+  '/pulpito/$sermonId': typeof AuthenticatedPulpitoSermonIdRoute
   '/sermoes/$sermonId': typeof AuthenticatedSermoesSermonIdRoute
   '/sermoes/florescer': typeof AuthenticatedSermoesFlorescerRoute
   '/sermoes': typeof AuthenticatedSermoesIndexRoute
@@ -105,6 +114,7 @@ export interface FileRoutesById {
   '/_authenticated/biblia': typeof AuthenticatedBibliaRoute
   '/_authenticated/configuracoes': typeof AuthenticatedConfiguracoesRoute
   '/_authenticated/projecao': typeof AuthenticatedProjecaoRoute
+  '/_authenticated/pulpito/$sermonId': typeof AuthenticatedPulpitoSermonIdRoute
   '/_authenticated/sermoes/$sermonId': typeof AuthenticatedSermoesSermonIdRoute
   '/_authenticated/sermoes/florescer': typeof AuthenticatedSermoesFlorescerRoute
   '/_authenticated/sermoes/': typeof AuthenticatedSermoesIndexRoute
@@ -118,6 +128,7 @@ export interface FileRouteTypes {
     | '/biblia'
     | '/configuracoes'
     | '/projecao'
+    | '/pulpito/$sermonId'
     | '/sermoes/$sermonId'
     | '/sermoes/florescer'
     | '/sermoes/'
@@ -129,6 +140,7 @@ export interface FileRouteTypes {
     | '/biblia'
     | '/configuracoes'
     | '/projecao'
+    | '/pulpito/$sermonId'
     | '/sermoes/$sermonId'
     | '/sermoes/florescer'
     | '/sermoes'
@@ -141,6 +153,7 @@ export interface FileRouteTypes {
     | '/_authenticated/biblia'
     | '/_authenticated/configuracoes'
     | '/_authenticated/projecao'
+    | '/_authenticated/pulpito/$sermonId'
     | '/_authenticated/sermoes/$sermonId'
     | '/_authenticated/sermoes/florescer'
     | '/_authenticated/sermoes/'
@@ -204,6 +217,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProjecaoRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/pulpito/$sermonId': {
+      id: '/_authenticated/pulpito/$sermonId'
+      path: '/pulpito/$sermonId'
+      fullPath: '/pulpito/$sermonId'
+      preLoaderRoute: typeof AuthenticatedPulpitoSermonIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/sermoes/': {
       id: '/_authenticated/sermoes/'
       path: '/sermoes'
@@ -232,6 +252,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedBibliaRoute: typeof AuthenticatedBibliaRoute
   AuthenticatedConfiguracoesRoute: typeof AuthenticatedConfiguracoesRoute
   AuthenticatedProjecaoRoute: typeof AuthenticatedProjecaoRoute
+  AuthenticatedPulpitoSermonIdRoute: typeof AuthenticatedPulpitoSermonIdRoute
   AuthenticatedSermoesSermonIdRoute: typeof AuthenticatedSermoesSermonIdRoute
   AuthenticatedSermoesFlorescerRoute: typeof AuthenticatedSermoesFlorescerRoute
   AuthenticatedSermoesIndexRoute: typeof AuthenticatedSermoesIndexRoute
@@ -241,6 +262,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedBibliaRoute: AuthenticatedBibliaRoute,
   AuthenticatedConfiguracoesRoute: AuthenticatedConfiguracoesRoute,
   AuthenticatedProjecaoRoute: AuthenticatedProjecaoRoute,
+  AuthenticatedPulpitoSermonIdRoute: AuthenticatedPulpitoSermonIdRoute,
   AuthenticatedSermoesSermonIdRoute: AuthenticatedSermoesSermonIdRoute,
   AuthenticatedSermoesFlorescerRoute: AuthenticatedSermoesFlorescerRoute,
   AuthenticatedSermoesIndexRoute: AuthenticatedSermoesIndexRoute,

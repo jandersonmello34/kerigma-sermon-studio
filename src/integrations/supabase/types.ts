@@ -61,6 +61,7 @@ export type Database = {
           bible_reference: string
           body: string
           created_at: string
+          duration_minutes: number
           id: string
           owner_id: string
           status: Database["public"]["Enums"]["sermon_status"]
@@ -72,6 +73,7 @@ export type Database = {
           bible_reference?: string
           body?: string
           created_at?: string
+          duration_minutes?: number
           id?: string
           owner_id?: string
           status?: Database["public"]["Enums"]["sermon_status"]
@@ -83,6 +85,7 @@ export type Database = {
           bible_reference?: string
           body?: string
           created_at?: string
+          duration_minutes?: number
           id?: string
           owner_id?: string
           status?: Database["public"]["Enums"]["sermon_status"]

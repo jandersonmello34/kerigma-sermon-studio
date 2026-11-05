@@ -107,7 +107,7 @@ export default function IdeaWizardPage() {
           format,
         },
       });
-      return createSermon.mutateAsync({ ...d, status: SermonStatus.draft });
+      return createSermon.mutateAsync({ ...d, status: SermonStatus.draft, durationMinutes: parseInt(input.duration, 10) || undefined });
     },
     onSuccess: (id) => {
       toast.success("Rascunho criado! Agora desenvolva a mensagem.");

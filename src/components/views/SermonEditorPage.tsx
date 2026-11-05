@@ -35,6 +35,8 @@ import {
   Heading2,
   Italic,
   Lightbulb,
+  Play,
+  Timer,
   List,
   Loader2,
   Save,
@@ -50,6 +52,7 @@ type Draft = {
   bibleReference: string;
   theme: string;
   status: SermonStatus;
+  durationMinutes: number;
 };
 
 const emptyDraft: Draft = {
@@ -58,6 +61,7 @@ const emptyDraft: Draft = {
   bibleReference: "",
   theme: "",
   status: SermonStatus.draft,
+  durationMinutes: 40,
 };
 
 function parseSermonId(raw: string | undefined): string | undefined {
@@ -93,6 +97,7 @@ export default function SermonEditorPage() {
         bibleReference: sermon.bibleReference,
         theme: sermon.theme,
         status: sermon.status,
+        durationMinutes: sermon.durationMinutes,
       });
       setInitialized(true);
     }
@@ -133,6 +138,7 @@ export default function SermonEditorPage() {
       bibleReference: draft.bibleReference.trim(),
       theme: draft.theme.trim(),
       status: draft.status,
+      durationMinutes: Math.min(300, Math.max(1, draft.durationMinutes || 40)),
     };
     if (isEditing && sermonId !== undefined) {
       updateSermon.mutate(
@@ -243,6 +249,17 @@ export default function SermonEditorPage() {
               Atualizado em {formatDateTime(sermonQuery.data.updatedAt)}
             </span>
           )}
+          {isEditing && sermonId && (
+            <Button
+              type="button"
+              variant="outline"
+              className="rounded-lg border-primary/50 text-primary"
+              onClick={() => void navigate({ to: "/pulpito/$sermonId", params: { sermonId } })}
+            >
+              <Play className="size-4" aria-hidden="true" />
+              Iniciar sermão
+            </Button>
+          )}
           <Button
             type="button"
             data-ocid="sermon_editor.save_button"
@@ -331,6 +348,31 @@ export default function SermonEditorPage() {
                       />
                     ))}
                   </datalist>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="sermon-duration" className="flex items-center gap-1.5">
+                  <Timer className="size-4 text-primary" aria-hidden="true" />
+                  Duração prevista (minutos)
+                </Label>
+                <div className="flex flex-wrap items-center gap-2">
+                  <Input
+                    id="sermon-duration"
+                    type="number"
+                    min={1}
+                    max={300}
+                    className="w-24"
+                    value={draft.durationMinutes || ""}
+                    onChange={(e) => update("durationMinutes", Number(e.target.value))}
+                  />
+                  {[20, 30, 40, 45, 50, 60].map((m) => (
+                    <Button key={m} type="button" size="sm"
+                      variant={draft.durationMinutes === m ? "default" : "outline"}
+                      onClick={() => update("durationMinutes", m)}>
+                      {m}
+                    </Button>
+                  ))}
                 </div>
               </div>
 

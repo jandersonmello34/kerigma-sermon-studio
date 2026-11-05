@@ -122,6 +122,13 @@ function SermonCard({
             {formatDate(sermon.updatedAt)}
           </span>
         </div>
+        <Link
+          to="/pulpito/$sermonId"
+          params={{ sermonId: sermon.id }}
+          className="mt-1 inline-flex items-center justify-center gap-2 rounded-lg border border-primary/40 px-3 py-2 text-sm font-medium text-primary transition-smooth hover:bg-primary/10"
+        >
+          ▶ Iniciar sermão · {sermon.durationMinutes} min
+        </Link>
       </CardContent>
     </Card>
   );

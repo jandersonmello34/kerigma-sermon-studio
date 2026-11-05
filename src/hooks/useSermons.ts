@@ -11,11 +11,12 @@ type Row = {
   bible_reference: string;
   theme: string;
   status: "draft" | "ready";
+  duration_minutes: number;
   created_at: string;
   updated_at: string;
 };
 
-const COLUMNS = "id,title,body,bible_reference,theme,status,created_at,updated_at";
+const COLUMNS = "id,title,body,bible_reference,theme,status,duration_minutes,created_at,updated_at";
 
 function toSermon(r: Row): Sermon {
   return {
@@ -25,6 +26,7 @@ function toSermon(r: Row): Sermon {
     bibleReference: r.bible_reference,
     theme: r.theme,
     status: r.status,
+    durationMinutes: r.duration_minutes,
     createdAt: r.created_at,
     updatedAt: r.updated_at,
   };
@@ -37,6 +39,7 @@ function toRow(input: SermonInput) {
     bible_reference: input.bibleReference,
     theme: input.theme,
     status: input.status,
+    ...(input.durationMinutes ? { duration_minutes: input.durationMinutes } : {}),
   };
 }
 

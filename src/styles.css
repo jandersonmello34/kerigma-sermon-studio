@@ -220,3 +220,23 @@
     radial-gradient(ellipse 80% 60% at 15% 0%, color-mix(in oklch, var(--primary) 7%, transparent), transparent 60%),
     radial-gradient(ellipse 60% 50% at 100% 100%, color-mix(in oklch, var(--accent) 5%, transparent), transparent 60%);
 }
+
+/* Pulpit timer glowing border: orange at 10 min left, red at 5 min left */
+:root {
+  --pulpit-orange: oklch(0.72 0.19 50);
+}
+.pulpit-glow-warning {
+  box-shadow: inset 0 0 0 6px var(--pulpit-orange), inset 0 0 60px 10px color-mix(in oklch, var(--pulpit-orange) 55%, transparent);
+  animation: pulpit-breathe 2.4s ease-in-out infinite;
+}
+.pulpit-glow-critical {
+  box-shadow: inset 0 0 0 8px var(--destructive), inset 0 0 80px 16px color-mix(in oklch, var(--destructive) 60%, transparent);
+  animation: pulpit-breathe 1.2s ease-in-out infinite;
+}
+.pulpit-glow-over {
+  box-shadow: inset 0 0 0 10px var(--destructive), inset 0 0 100px 24px color-mix(in oklch, var(--destructive) 70%, transparent);
+}
+@keyframes pulpit-breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
