@@ -13,10 +13,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as AuthenticatedBibliaRouteImport } from './routes/_authenticated/biblia'
 import { Route as AuthenticatedConfiguracoesRouteImport } from './routes/_authenticated/configuracoes'
 import { Route as AuthenticatedProjecaoRouteImport } from './routes/_authenticated/projecao'
 import { Route as AuthenticatedSermoesIndexRouteImport } from './routes/_authenticated/sermoes.index'
 import { Route as AuthenticatedSermoesSermonIdRouteImport } from './routes/_authenticated/sermoes.$sermonId'
+import { Route as AuthenticatedSermoesFlorescerRouteImport } from './routes/_authenticated/sermoes.florescer'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -36,6 +38,11 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedBibliaRoute = AuthenticatedBibliaRouteImport.update({
+  id: '/biblia',
+  path: '/biblia',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedConfiguracoesRoute =
   AuthenticatedConfiguracoesRouteImport.update({
@@ -60,23 +67,33 @@ const AuthenticatedSermoesSermonIdRoute =
     path: '/sermoes/$sermonId',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedSermoesFlorescerRoute =
+  AuthenticatedSermoesFlorescerRouteImport.update({
+    id: '/sermoes/florescer',
+    path: '/sermoes/florescer',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/biblia': typeof AuthenticatedBibliaRoute
   '/configuracoes': typeof AuthenticatedConfiguracoesRoute
   '/projecao': typeof AuthenticatedProjecaoRoute
   '/sermoes/$sermonId': typeof AuthenticatedSermoesSermonIdRoute
+  '/sermoes/florescer': typeof AuthenticatedSermoesFlorescerRoute
   '/sermoes/': typeof AuthenticatedSermoesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/biblia': typeof AuthenticatedBibliaRoute
   '/configuracoes': typeof AuthenticatedConfiguracoesRoute
   '/projecao': typeof AuthenticatedProjecaoRoute
   '/sermoes/$sermonId': typeof AuthenticatedSermoesSermonIdRoute
+  '/sermoes/florescer': typeof AuthenticatedSermoesFlorescerRoute
   '/sermoes': typeof AuthenticatedSermoesIndexRoute
 }
 export interface FileRoutesById {
@@ -85,9 +102,11 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/biblia': typeof AuthenticatedBibliaRoute
   '/_authenticated/configuracoes': typeof AuthenticatedConfiguracoesRoute
   '/_authenticated/projecao': typeof AuthenticatedProjecaoRoute
   '/_authenticated/sermoes/$sermonId': typeof AuthenticatedSermoesSermonIdRoute
+  '/_authenticated/sermoes/florescer': typeof AuthenticatedSermoesFlorescerRoute
   '/_authenticated/sermoes/': typeof AuthenticatedSermoesIndexRoute
 }
 export interface FileRouteTypes {
@@ -96,18 +115,22 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/reset-password'
+    | '/biblia'
     | '/configuracoes'
     | '/projecao'
     | '/sermoes/$sermonId'
+    | '/sermoes/florescer'
     | '/sermoes/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
     | '/reset-password'
+    | '/biblia'
     | '/configuracoes'
     | '/projecao'
     | '/sermoes/$sermonId'
+    | '/sermoes/florescer'
     | '/sermoes'
   id:
     | '__root__'
@@ -115,9 +138,11 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/reset-password'
+    | '/_authenticated/biblia'
     | '/_authenticated/configuracoes'
     | '/_authenticated/projecao'
     | '/_authenticated/sermoes/$sermonId'
+    | '/_authenticated/sermoes/florescer'
     | '/_authenticated/sermoes/'
   fileRoutesById: FileRoutesById
 }
@@ -158,6 +183,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/biblia': {
+      id: '/_authenticated/biblia'
+      path: '/biblia'
+      fullPath: '/biblia'
+      preLoaderRoute: typeof AuthenticatedBibliaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/configuracoes': {
       id: '/_authenticated/configuracoes'
       path: '/configuracoes'
@@ -186,20 +218,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSermoesSermonIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/sermoes/florescer': {
+      id: '/_authenticated/sermoes/florescer'
+      path: '/sermoes/florescer'
+      fullPath: '/sermoes/florescer'
+      preLoaderRoute: typeof AuthenticatedSermoesFlorescerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedBibliaRoute: typeof AuthenticatedBibliaRoute
   AuthenticatedConfiguracoesRoute: typeof AuthenticatedConfiguracoesRoute
   AuthenticatedProjecaoRoute: typeof AuthenticatedProjecaoRoute
   AuthenticatedSermoesSermonIdRoute: typeof AuthenticatedSermoesSermonIdRoute
+  AuthenticatedSermoesFlorescerRoute: typeof AuthenticatedSermoesFlorescerRoute
   AuthenticatedSermoesIndexRoute: typeof AuthenticatedSermoesIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedBibliaRoute: AuthenticatedBibliaRoute,
   AuthenticatedConfiguracoesRoute: AuthenticatedConfiguracoesRoute,
   AuthenticatedProjecaoRoute: AuthenticatedProjecaoRoute,
   AuthenticatedSermoesSermonIdRoute: AuthenticatedSermoesSermonIdRoute,
+  AuthenticatedSermoesFlorescerRoute: AuthenticatedSermoesFlorescerRoute,
   AuthenticatedSermoesIndexRoute: AuthenticatedSermoesIndexRoute,
 }
 

@@ -1,7 +1,7 @@
 import { SignOutButton } from "@/components/SignOutButton";
 import { cn } from "@/lib/utils";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { BookOpenText, MonitorPlay, Settings, Sparkles } from "lucide-react";
+import { BookOpen, BookOpenText, MonitorPlay, Settings, Sparkles } from "lucide-react";
 import type { ReactNode } from "react";
 
 type NavItem = {
@@ -13,6 +13,7 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   { to: "/sermoes", label: "Sermões", icon: BookOpenText, ocid: "nav.sermons.link" },
+  { to: "/biblia", label: "Bíblia", icon: BookOpen, ocid: "nav.bible.link" },
   {
     to: "/projecao",
     label: "Projeção",

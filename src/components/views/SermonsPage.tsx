@@ -30,7 +30,8 @@ import {
   statusBadgeClass,
 } from "@/lib/format";
 import { cn } from "@/lib/utils";
-import { Link, useNavigate } from "@tanstack/react-router";
+import { CreateSermonDialog } from "@/components/CreateSermonDialog";
+import { Link } from "@tanstack/react-router";
 import {
   BookOpenText,
   Loader2,
@@ -144,7 +145,7 @@ function SermonCardSkeleton() {
 }
 
 export default function SermonsPage() {
-  const navigate = useNavigate();
+  const [createOpen, setCreateOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [theme, setTheme] = useState<string>(ALL_THEMES);
   const [status, setStatus] = useState<string>(ALL_STATUS);
@@ -201,6 +202,7 @@ export default function SermonsPage() {
 
   return (
     <section data-ocid="sermons.page" className="mx-auto w-full max-w-6xl">
+      <CreateSermonDialog open={createOpen} onOpenChange={setCreateOpen} />
       <header className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="font-display text-3xl font-semibold tracking-tight">
@@ -213,9 +215,7 @@ export default function SermonsPage() {
         <Button
           type="button"
           data-ocid="sermons.new_button"
-          onClick={() =>
-            navigate({ to: "/sermoes/$sermonId", params: { sermonId: "novo" } })
-          }
+          onClick={() => setCreateOpen(true)}
           className="rounded-lg bg-primary px-4 font-medium text-primary-foreground shadow-gold-glow transition-smooth hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
         >
           <Plus className="size-4" aria-hidden="true" />
@@ -352,12 +352,7 @@ export default function SermonsPage() {
               <Button
                 type="button"
                 data-ocid="sermons.empty_new_button"
-                onClick={() =>
-                  navigate({
-                    to: "/sermoes/$sermonId",
-                    params: { sermonId: "novo" },
-                  })
-                }
+                onClick={() => setCreateOpen(true)}
                 className="rounded-lg bg-primary px-4 font-medium text-primary-foreground shadow-gold-glow transition-smooth hover:bg-primary/90"
               >
                 <Plus className="size-4" aria-hidden="true" />
