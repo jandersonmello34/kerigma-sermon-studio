@@ -13,7 +13,7 @@ export type Sermon = {
   updatedAt: string;
 };
 
-export type SermonInput = Omit<Sermon, "id" | "createdAt" | "updatedAt" | "durationMinutes"> & { durationMinutes?: number };
+export type SermonInput = Omit<Sermon, "id" | "createdAt" | "updatedAt" | "durationMinutes"> & { durationMinutes?: number | undefined };
 export type SermonUpdate = SermonInput;
 
 export type SermonFilter = {

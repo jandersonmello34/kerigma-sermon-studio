@@ -9,7 +9,7 @@ const s: Sermon = {
   body: "Texto sobre fé",
   bibleReference: "Efésios 2:8",
   theme: "graça",
-  status: "draft",
+  status: "draft", durationMinutes: 40,
   createdAt: "",
   updatedAt: "",
 };
