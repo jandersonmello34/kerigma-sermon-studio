@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
-import { BIBLE_VERSIONS, BOOK_NAMES, type BibleVersion, useBible } from "@/lib/bible";
+import { BIBLE_VERSIONS, BOOK_NAMES, type BibleVersion, useBible, useBibleBooks, useBibleChapter } from "@/lib/bible";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -82,7 +82,7 @@ export function ChapterText({
   selected?: (verse: number) => boolean;
   onVerseClick?: (verse: number) => void;
 }) {
-  const { data, isLoading, isError } = useBible(version);
+  const { data: verses, isLoading, isError } = useBibleChapter(version, pos.book, pos.chapter);
   if (isLoading) {
     return (
       <div className="space-y-2">
@@ -90,8 +90,7 @@ export function ChapterText({
       </div>
     );
   }
-  if (isError || !data) return <p className="text-sm text-destructive">Não foi possível carregar esta versão.</p>;
-  const verses = data[pos.book]?.chapters[pos.chapter - 1] ?? [];
+  if (isError || !verses) return <p className="text-sm text-destructive">Não foi possível carregar esta versão.</p>;
   return (
     <ol className="space-y-1.5 font-display text-[1.05rem] leading-relaxed">
       {verses.map((v, i) => {
@@ -120,6 +119,7 @@ export function ChapterText({
 }
 
 export function useChapterCount(version: BibleVersion, book: number) {
-  const { data } = useBible(version);
-  return data?.[book]?.chapters.length ?? 50;
+  const { data: whole } = useBible(version);
+  const { data: books } = useBibleBooks(version);
+  return whole?.[book]?.chapters.length ?? books?.[book]?.chapters ?? 50;
 }
